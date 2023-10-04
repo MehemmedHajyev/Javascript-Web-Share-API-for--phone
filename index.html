@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javascript Web Share API</title>
+    <style>
+      #content,
+      #eror {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="share-btn">Paylaş</button>
+
+    <div id="content">bu alan paylaşildiqinda göreceksin</div>
+    <div id="eror">Paylasirken bir sorun oluştu</div>
+
+    <script>
+      const button = document.getElementById("share-btn");
+      const content = document.getElementById("content");
+      const eror = document.getElementById("eror");
+
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (navigator.share) {
+          const shareData = {
+            title: "",
+            text: "Use share  Api",
+            url: "https://admirable-kitsune-05cc24.netlify.app/",
+          };
+          console.log(shareData);
+          navigator
+            .share(shareData)
+            .then(() => {
+              content.style.display = "block";
+            })
+            .catch((e) => {
+              eror.style.display = "block";
+            });
+        }
+      });
+    </script>
+  </body>
+</html>
